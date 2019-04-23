@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 void main() => runApp(MyApp());
 
@@ -9,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'WeightRecord',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primaryColor: Color(0xFF23CB79),
         primaryColorLight: Colors.white,
       ),
       home: MyHomePage(),
@@ -76,7 +77,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ],
                   ),
-                  Row(),
+                  Container(
+                    width: double.infinity,
+                    child: Center(
+                      child: CustomPaint(
+                        size: Size(200, 200),
+                        foregroundPainter: MyBackgroudPainter(),
+                        painter: MyContentPainter(),
+                        isComplex: false
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsets.only(bottom: 20),
                     child: Row(
@@ -110,5 +121,95 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       )
     );
+  }
+}
+
+class MyBackgroudPainter extends CustomPainter {
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint() //创建一个画笔并配置其属性
+      ..isAntiAlias = true //是否抗锯齿
+      ..style = PaintingStyle.fill //画笔样式：填充
+      ..color=Color(0xFF00FF00);
+    // canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), paint);//画笔颜色
+
+    //定义半径
+    double radius = size.width / 2 - 10;
+    double centerX = size.width / 2.0;
+    double centerY = size.height / 2.0;
+    //起始角度
+    double startAngel = - math.pi * 5 / 4.0;
+    double sweepAngel = math.pi * 3 / 2.0;
+
+    var rect = Rect.fromCircle(center: Offset(centerX, centerY), radius: radius);
+    var innerRect = Rect.fromCircle(center: Offset(centerX, centerY), radius: radius - 12);
+    var outerRect = Rect.fromCircle(center: Offset(centerX, centerY), radius: radius + 9);
+
+    // paint.color = Color(0xFFFFFFFF);
+    paint.style = PaintingStyle.stroke;
+    paint.shader = SweepGradient(
+        colors: [Colors.white54, Colors.white, Colors.white54],
+        stops: [0.5, 0.75, 1],
+      ).createShader(rect);
+    paint.strokeWidth = 12;
+    
+    canvas.drawArc(
+      rect,
+      startAngel, 
+      sweepAngel,
+      false, 
+      paint
+    );
+
+    paint.color = Colors.white54;
+    paint.style = PaintingStyle.stroke;
+    paint.shader = null;
+    paint.strokeWidth = 30;
+    canvas.drawArc(
+      outerRect,
+      startAngel - math.pi * 1 / 180, 
+      math.pi * 1 / 180,
+      false, 
+      paint
+    );
+    canvas.drawArc(
+      outerRect,
+      startAngel + sweepAngel,
+      math.pi * 1 / 180,
+      false, 
+      paint
+    );
+
+
+    paint.color = Colors.white30;
+    paint.strokeWidth = 12;
+     paint.shader = SweepGradient(
+        colors: [Colors.white54, Colors.white10, Colors.white54],
+        stops: [0, 1 / 4.0, 1 / 2.0],
+      ).createShader(rect);
+    canvas.drawArc(
+      innerRect,
+      0, 
+      2 * math.pi,
+      false, 
+      paint
+    );
+  }
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
+class MyContentPainter extends CustomPainter {
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    
+  }
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
