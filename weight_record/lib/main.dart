@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 void main() => runApp(MyApp());
 
@@ -81,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: double.infinity,
                     child: Center(
                       child: CustomPaint(
-                        size: Size(200, 200),
+                        size: Size(220, 220),
                         foregroundPainter: MyBackgroudPainter(),
                         painter: MyContentPainter(),
                         isComplex: false
@@ -95,19 +96,19 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: <Widget>[
                         Column(
                           children: <Widget>[
-                            Text('0.0', style: TextStyle(color: Theme.of(context).primaryColorLight, fontSize: 20)),
+                            Text('0.0', style: TextStyle(color: Theme.of(context).primaryColorLight, fontSize: 20, fontFamily: 'Oswald')),
                             Text('对比上次', style: TextStyle(color: Theme.of(context).primaryColorLight, fontSize: 12, fontWeight: FontWeight.w400))
                           ],
                         ),
                         Column(
                           children: <Widget>[
-                            Text('150.0', style: TextStyle(color: Theme.of(context).primaryColorLight, fontSize: 20)),
+                            Text('150.0', style: TextStyle(color: Theme.of(context).primaryColorLight, fontSize: 20, fontFamily: 'Oswald')),
                             Text('目标体重', style: TextStyle(color: Theme.of(context).primaryColorLight, fontSize: 12, fontWeight: FontWeight.w400))
                           ],
                         ),
                         Column(
                           children: <Widget>[
-                            Text('66.0', style: TextStyle(color: Theme.of(context).primaryColorLight, fontSize: 20)),
+                            Text('66.0', style: TextStyle(color: Theme.of(context).primaryColorLight, fontSize: 20, fontFamily: 'Oswald')),
                             Text('距离目标', style: TextStyle(color: Theme.of(context).primaryColorLight, fontSize: 12, fontWeight: FontWeight.w400))
                           ],
                         )
@@ -117,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             )
-          )
+          ),
         ],
       )
     );
@@ -206,7 +207,60 @@ class MyContentPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    
+    String prefix = '150';
+    String subfix  = '.0';
+    ui.ParagraphBuilder paragraphBuilder = ui.ParagraphBuilder(
+        ui.ParagraphStyle(
+          textAlign: TextAlign.center,
+          textDirection: TextDirection.ltr,
+          maxLines: 1,
+          fontFamily: 'Oswald',
+        ),
+      )
+      ..pushStyle(
+        ui.TextStyle(
+          color: Colors.white, 
+          textBaseline: ui.TextBaseline.ideographic,
+          fontSize: 60.0,
+        ),
+      )
+      ..addText(prefix)
+      ..pop()
+      ..pushStyle(
+        ui.TextStyle(
+          color: Colors.white, 
+          textBaseline: ui.TextBaseline.ideographic,
+          fontSize: 35.0,
+        ),
+      )
+      ..addText(subfix);
+    ui.Paragraph paragraph = paragraphBuilder.build()
+        ..layout(ui.ParagraphConstraints(width: size.width));
+    //文字居中显示
+    Offset offset = Offset((size.width - paragraph.width) / 2.0, (size.height - paragraph.height) / 2.0 - 5.0);
+    canvas.drawParagraph(paragraph, offset);
+
+    //绘制文字
+    ui.ParagraphBuilder paragraphBuilder2 = ui.ParagraphBuilder(
+        ui.ParagraphStyle(
+          textAlign: TextAlign.center,
+          textDirection: TextDirection.ltr,
+          maxLines: 1,
+        ),
+      )
+      ..pushStyle(
+        ui.TextStyle(
+          color: Colors.white, 
+          textBaseline: ui.TextBaseline.alphabetic,
+          fontSize: 14.0,
+        ),
+      )
+      ..addText('今天未记录');
+    ui.Paragraph paragraph2 = paragraphBuilder2.build()
+        ..layout(ui.ParagraphConstraints(width: size.width));
+    //文字居中显示
+    Offset offset2 = Offset((size.width - paragraph2.width) / 2.0, (size.height + paragraph.height) / 2.0 - 13.0);
+    canvas.drawParagraph(paragraph2, offset2);
   }
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {

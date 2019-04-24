@@ -47,6 +47,11 @@ flutter:
    - assets/ico_person.png
    - assets/2x/ico_person.png
 
+  fonts:
+    - family: Oswald
+      fonts:
+        - asset: assets/font/Oswald-Regular.ttf
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
