@@ -3,6 +3,8 @@ import 'dart:math' as math;
 import 'dart:ui' as ui;
 import 'wr_bottom_navigation_bar.dart';
 
+import 'package:weight_record/profile.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFF189A7C),
         primaryColorLight: Colors.white,
+        primaryColorDark: Colors.black,
       ),
       home: MyHomePage(),
     );
@@ -82,7 +85,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         highlightColor: Color(0x7FFFFFFF),
                         iconSize: 25,
                         onPressed: () {
-                          
+                          Navigator.of(context)
+                              .push(new MaterialPageRoute(builder: (context) {
+                            return new ProfilePage();
+                          }));
                         }
                       ),
                     ],

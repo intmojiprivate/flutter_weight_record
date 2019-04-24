@@ -35,7 +35,7 @@ class _WRBottomNavigationBarState extends State<WRBottomNavigationBar> {
     return Container(
       width: double.infinity,
       height: bottomPadding + 49,
-      color: Color(0xFFF4FBF9),
+      color: Color(0xFFf2fbf9),
       child: Padding(
         padding: EdgeInsets.only(bottom: bottomPadding),
         child: Row(
@@ -66,7 +66,7 @@ class _WRBottomNavigationBarState extends State<WRBottomNavigationBar> {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Color(0xFFD9F4EE), Color(0xFFF4FBF9)],
+                      colors: [Color(0xFFdbf4ee), Color(0xFFf2fbf9)],
                       stops: [0, 1],
                     )
                   ),
