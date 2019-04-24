@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
+import 'wr_bottom_navigation_bar.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'WeightRecord',
       theme: ThemeData(
-        primaryColor: Color(0xFF23CB79),
+        primaryColor: Color(0xFF189A7C),
         primaryColorLight: Colors.white,
       ),
       home: MyHomePage(),
@@ -37,17 +38,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  bool navigationWillSwitch(index) {
+    return true;
+  }
+  void record() {
+
+  }
+
   @override
   Widget build(BuildContext context) {
-    double screen_width = MediaQuery.of(context).size.width;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Flex(
         direction: Axis.vertical,
         children: <Widget>[
           Container(
             color: Theme.of(context).primaryColor,
-            width: screen_width,
-            height: screen_width,
+            width: screenWidth,
+            height: screenWidth,
             child: SafeArea(
               bottom: false,
               child: Column(
@@ -119,8 +128,17 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             )
           ),
+          Expanded(
+            flex: 1,
+            child: Column(
+              children: <Widget>[
+
+              ],
+            ),
+          ),
         ],
-      )
+      ),
+      bottomNavigationBar: WRBottomNavigationBar(willSwitch: navigationWillSwitch, onTapCenter: record),
     );
   }
 }

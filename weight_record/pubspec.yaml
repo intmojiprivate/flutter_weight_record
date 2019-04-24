@@ -46,6 +46,12 @@ flutter:
    - assets/2x/ico_shop.png
    - assets/ico_person.png
    - assets/2x/ico_person.png
+   - assets/ico_plus.png
+   - assets/2x/ico_plus.png
+   - assets/ico_chart_type1.png
+   - assets/2x/ico_chart_type1.png
+   - assets/ico_chart_type2.png
+   - assets/2x/ico_chart_type2.png
 
   fonts:
     - family: Oswald
