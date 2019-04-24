@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 import 'wr_bottom_navigation_bar.dart';
-
+import 'wr_date_list.dart';
 import 'package:weight_record/profile.dart';
 
 void main() => runApp(MyApp());
@@ -136,11 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Expanded(
             flex: 1,
-            child: Column(
-              children: <Widget>[
-
-              ],
-            ),
+            child: WRDateList(),
           ),
         ],
       ),
@@ -205,7 +201,6 @@ class MyBackgroudPainter extends CustomPainter {
       false, 
       paint
     );
-
 
     paint.color = Colors.white30;
     paint.strokeWidth = 12;

@@ -52,6 +52,12 @@ flutter:
    - assets/2x/ico_chart_type1.png
    - assets/ico_chart_type2.png
    - assets/2x/ico_chart_type2.png
+   - assets/ico_next.png
+   - assets/2x/ico_next.png
+
+
+  #需要重新找的
+   - assets/ico_face.png
 
   fonts:
     - family: Oswald
