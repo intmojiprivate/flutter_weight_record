@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'WeightRecord',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Color(0xFF189A7C),
         primaryColorLight: Colors.white,

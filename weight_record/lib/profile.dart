@@ -13,89 +13,241 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-        appBar: AppBar(
-          title: Text('我的'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 20.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                new MyPageItem(
-                    title: Text(
-                      '体重单位',
-                      style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: 16),
+      body: Flex(
+        direction: Axis.vertical,
+        children: <Widget>[
+          Container(
+            color: Theme.of(context).primaryColor,
+            child: SafeArea(
+              bottom: false,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        IconButton(
+                            icon: Icon(Icons.clear),
+                            color: Theme.of(context).primaryColorLight,
+                            highlightColor: Color(0x7FFFFFFF),
+                            iconSize: 25,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            }),
+                      ],
                     ),
-                    icon: Icon(
-                      Icons.line_weight,
-                      color: Theme.of(context).primaryColor,
+                  ),
+                  new Container(
+                    padding: const EdgeInsets.all(32.0),
+                    child: new Row(
+                      children: [
+                        new CircleAvatar(
+                          radius: 25.0,
+                          backgroundImage: new NetworkImage(
+                              "https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3463668003,3398677327&fm=58"),
+                        ),
+                        new Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: new Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                new Container(
+                                  padding: const EdgeInsets.only(bottom: 8.0),
+                                  child: new Text(
+                                    'Luke',
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.0,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                                new Text(
+                                  '数据已经同步到云端',
+                                  style: new TextStyle(
+                                      color: Colors.white, fontSize: 12.0),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    itemText: Text('斤',style:TextStyle(color: Colors.grey, fontSize: 14)),
-                    onTap: (TapUpDetails details) => {
-                    }),
-                new MyPageItem(
-                    title: Text(
-                      '体重目标',
-                      style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: 16),
+                  ),
+                  new Container(
+                    width: screenWidth - 30,
+                    child: Divider(
+                      color: Colors.white,
+                      height: 1,
                     ),
-                    icon: Icon(Icons.merge_type, color: Theme.of(context).primaryColor,),
-                    itemText: Text('未设置',style:TextStyle(color: Colors.grey, fontSize: 14)),
-                    onTap: (TapUpDetails details) => {
-                    }),
-                new MyPageItem(
-                    title: Text(
-                      '记录提醒',
-                      style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: 16),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20, top: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Text('0',
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColorLight,
+                                    fontSize: 20,
+                                    fontFamily: 'Oswald')),
+                            Text('坚持记录(天)',
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColorLight,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400))
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Text('0.0',
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColorLight,
+                                    fontSize: 20,
+                                    fontFamily: 'Oswald')),
+                            Text('体重变化(斤)',
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColorLight,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400))
+                          ],
+                        ),
+                      ],
                     ),
-                    icon: Icon(Icons.alarm_add, color: Theme.of(context).primaryColor,),
-                    itemText: Text('21:00',style:TextStyle(color: Colors.grey, fontSize: 14)),
-                    onTap: (TapUpDetails details) => {}),
-                new MyPageItem(
-                    title: Text(
-                      '更换皮肤',
-                      style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: 16),
+                  ),
+                  new Container(height: 20),
+                  new Container(
+                    padding: EdgeInsets.only(top: 20.0),
+                    color: Colors.white,
+                    child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        new MyPageItem(
+                            title: Text(
+                              '体重单位',
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorDark,
+                                  fontSize: 16),
+                            ),
+                            icon: Icon(
+                              Icons.line_weight,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            itemText: Text('斤',
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 14)),
+                            onTap: (TapUpDetails details) => {}),
+                        new MyPageItem(
+                            title: Text(
+                              '体重目标',
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorDark,
+                                  fontSize: 16),
+                            ),
+                            icon: Icon(
+                              Icons.merge_type,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            itemText: Text('未设置',
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 14)),
+                            onTap: (TapUpDetails details) => {}),
+                        new MyPageItem(
+                            title: Text(
+                              '记录提醒',
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorDark,
+                                  fontSize: 16),
+                            ),
+                            icon: Icon(
+                              Icons.alarm_add,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            itemText: Text('21:00',
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 14)),
+                            onTap: (TapUpDetails details) => {}),
+                        new MyPageItem(
+                            title: Text(
+                              '更换皮肤',
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorDark,
+                                  fontSize: 16),
+                            ),
+                            icon: Icon(
+                              Icons.palette,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            itemText: Text('绿色',
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 16)),
+                            onTap: (
+                              TapUpDetails details,
+                            ) =>
+                                {}),
+                        new Container(height: 20),
+                        new MyPageItem(
+                            title: Text(
+                              '好评鼓励',
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorDark,
+                                  fontSize: 16),
+                            ),
+                            icon: Icon(
+                              Icons.star_border,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            itemText: Text('',
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 16)),
+                            onTap: (TapUpDetails details) => {}),
+                        new MyPageItem(
+                            title: Text(
+                              '设置',
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorDark,
+                                  fontSize: 16),
+                            ),
+                            icon: Icon(
+                              Icons.settings,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            itemText: Text('',
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 16)),
+                            onTap: (TapUpDetails details) => {}),
+                        new Container(height: 20),
+                        new MyPageItem(
+                            title: Text(
+                              '七分钟运动',
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorDark,
+                                  fontSize: 16),
+                            ),
+                            icon: Icon(
+                              Icons.filter_7,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            itemText: Text('',
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 16)),
+                            onTap: (TapUpDetails details) => {}),
+                      ],
                     ),
-                    icon: Icon(Icons.palette, color: Theme.of(context).primaryColor,),
-                    itemText: Text('绿色',style:TextStyle(color: Colors.grey, fontSize: 16)),
-                    onTap: (
-                        TapUpDetails details,
-                        ) =>
-                    {}),
-
-                new Container(height: 20),
-
-                new MyPageItem(
-                    title: Text(
-                      '好评鼓励',
-                      style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: 16),
-                    ),
-                    icon: Icon(Icons.star_border, color: Theme.of(context).primaryColor,),
-                    itemText:Text('',style:TextStyle(color: Colors.grey, fontSize: 16)),
-                    onTap: (TapUpDetails details) => {}),
-                new MyPageItem(
-                    title: Text(
-                      '设置',
-                      style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: 16),
-                    ),
-                    icon: Icon(Icons.settings, color: Theme.of(context).primaryColor,),
-                    itemText:Text('',style:TextStyle(color: Colors.grey, fontSize: 16)),
-                    onTap: (TapUpDetails details) => {}),
-
-                new Container(height: 20),
-
-                new MyPageItem(
-                    title: Text(
-                      '七分钟运动',
-                      style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: 16),
-                    ),
-                    icon: Icon(Icons.filter_7, color: Theme.of(context).primaryColor,),
-                    itemText:Text('',style:TextStyle(color: Colors.grey, fontSize: 16)),
-                    onTap: (TapUpDetails details) => {}),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
-        ));
+        ],
+      ),
+    );
   }
 }
 
@@ -105,7 +257,8 @@ class MyPageItem extends StatelessWidget {
   final Widget icon;
   final Widget itemText;
 
-  MyPageItem({Key key, this.title, this.icon, this.itemText,this.onTap}) : super(key: key);
+  MyPageItem({Key key, this.title, this.icon, this.itemText, this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -127,10 +280,8 @@ class MyPageItem extends StatelessWidget {
                       padding: EdgeInsets.only(left: 15),
                       child: title,
                     ),
-
                   ],
                 ),
-
                 Row(
                   children: <Widget>[
                     itemText,
@@ -140,7 +291,6 @@ class MyPageItem extends StatelessWidget {
                     ),
                   ],
                 ),
-
               ],
             ),
           ),
